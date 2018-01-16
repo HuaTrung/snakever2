@@ -5,6 +5,7 @@ format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 bot
+  rotate: false
   xy: 1200, 173
   size: 128, 128
   split: 0, 0, 0, 0
