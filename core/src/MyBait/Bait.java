@@ -1,4 +1,4 @@
-package com.gnurt.game;
+package MyBait;
 
 public class Bait {
 	

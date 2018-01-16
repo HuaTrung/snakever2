@@ -3,10 +3,11 @@ package com.gnurt.SnakeAI;
 import java.util.LinkedList;
 
 import com.badlogic.gdx.math.Vector2;
-import com.gnurt.game.Bait;
-import com.gnurt.game.Snake;
-import com.gnurt.game.Snake.Dir;
-import com.gnurt.game.World;
+import com.gnurt.MySnake.Snake;
+import com.gnurt.MySnake.Snake.Dir;
+import com.gnurt.manager.World;
+
+import MyBait.Bait;
 public class SnakeControllerAI {
 	
 
@@ -35,20 +36,6 @@ public class SnakeControllerAI {
 		return collidedWithBait();
 	}
 	
-//	private boolean outOfBorder() {
-//		int[] tmp = new int[] {(int) snakeBody.peekLast().x,(int) snakeBody.peekLast().y};
-//		if(tmp[0] < 0 || tmp[1] < 0 ||tmp[0]>29||tmp[1]>29/*|| tmp.x + tmp.width >= worldWidth || tmp.y + tmp.height >= worldHeight*/)
-//			return true;
-//		return false;
-//	}
-//	
-//	private boolean collidedWithSelf() {
-//		for(int i = 0; i < snakeBody.size() - 2; i++) {
-//			if((snakeBody.get(i).x==snakeBody.peekLast().x)&&(snakeBody.get(i).y==snakeBody.peekLast().y))
-//				return true;
-//		}
-//		return false;
-//	}
 	
 	public boolean collidedWithBait() {
 		if(bait.isSpawned()) {

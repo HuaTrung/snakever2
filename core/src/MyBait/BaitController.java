@@ -1,9 +1,10 @@
-package com.gnurt.game;
+package MyBait;
 
 import java.util.LinkedList;
 import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
+import com.gnurt.manager.World;
 
 public class BaitController {
 	
@@ -46,8 +47,8 @@ public class BaitController {
 	
 	private void spawnTry() {
 		Random rn = new Random();
-		int y=rn.nextInt(29);
-		int x=rn.nextInt(29);	
+		int y=rn.nextInt(30)+1;
+		int x=rn.nextInt(30)+1;	
 		int pos=rn.nextInt(11);
 		boolean stop=false;
 		while(!stop) {
@@ -65,8 +66,8 @@ public class BaitController {
 				}
 			}
 			if(!stop) {
-				y=rn.nextInt(29);
-				x=rn.nextInt(29);
+				 y=rn.nextInt(30)+1;
+				 x=rn.nextInt(30)+1;	
 			}
 		}
 		bait.pos=pos;

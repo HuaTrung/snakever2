@@ -1,13 +1,14 @@
-package com.gnurt.game;
+package com.gnurt.MySnake;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 import com.badlogic.gdx.math.Vector2;
-import com.gnurt.game.Snake;
-import com.gnurt.game.Snake.Dir;
-import com.gnurt.game.World;
+import com.gnurt.MySnake.Snake.Dir;
+import com.gnurt.manager.World;
+
+import MyBait.Bait;
 public class SnakeController {
 	
 	enum Keys { UP, DOWN, LEFT, RIGHT }
@@ -47,7 +48,7 @@ public class SnakeController {
 	
 	private boolean outOfBorder() {
 		int[] tmp = new int[] {(int) snakeBody.peekLast().x,(int) snakeBody.peekLast().y};
-		if(tmp[0] < 0 || tmp[1] < 0 ||tmp[0]>29||tmp[1]>29/*|| tmp.x + tmp.width >= worldWidth || tmp.y + tmp.height >= worldHeight*/)
+		if(tmp[0] < 1 || tmp[1] < 1 ||tmp[0]>30||tmp[1]>30/*|| tmp.x + tmp.width >= worldWidth || tmp.y + tmp.height >= worldHeight*/)
 			return true;
 		return false;
 	}
@@ -145,7 +146,6 @@ public class SnakeController {
 		
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void upPressed() {
 		//System.out.println("CHANGE UP TO TRUE");
 		keys.get(keys.put(Keys.UP,true));
@@ -153,44 +153,37 @@ public class SnakeController {
 	}
 	
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void upReleased() {
 		//System.out.println("CHANGE UP TO FALSE");
 		keys.get(keys.put(Keys.UP, false));
 		//keys.put(Keys.UP, false);
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void downPressed() {
 		keys.get(keys.put(Keys.DOWN, true));
 		//keys.put(Keys.DOWN, true);
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void downReleased() {
 		keys.get(keys.put(Keys.DOWN, false));
 		//keys.put(Keys.DOWN, false);
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void leftPressed() {
 		keys.get(keys.put(Keys.LEFT, true));
 		//keys.put(Keys.LEFT, true);
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void leftReleased() {
 		keys.get(keys.put(Keys.LEFT, false));
 		//keys.put(Keys.LEFT, false);
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	public void rightPressed() {
 		keys.get(keys.put(Keys.RIGHT, true));
 		//keys.put(Keys.RIGHT, true);
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void rightReleased() {
 		keys.get(keys.put(Keys.RIGHT, false));
 		//keys.put(Keys.RIGHT, true);

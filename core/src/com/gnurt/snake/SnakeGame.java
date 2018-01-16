@@ -26,10 +26,11 @@ public class SnakeGame extends ApplicationAdapter {
 		textureatlas=new TextureAtlas((Gdx.files.internal("data.atlas")));
 		MyAsset.Instance();
 		MyCamera.Instance();
+		MySound.Instance();
 		batch=new SpriteBatch();
 		gsm=new GameStateManager();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
-		gsm.push(new MenuState(gsm,textureatlas));
+		gsm.push(new PlayState(gsm,textureatlas));
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package com.gnurt.state;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,13 +21,12 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.gnurt.manager.*;
 
-//import aurelienribon.tweenengine.TweenManager;
+
 public class MenuState extends State{
+	
 	private Texture background;
 	private Texture menustate;
-//	private TextureRegion title;
-	//private Sprite background;
-	//private static TweenManager tweenManager;
+	
 	private MyActor tittle;
 
 	private MyMenuButton buttonPlay;
@@ -51,16 +49,18 @@ public class MenuState extends State{
 	private ImageButton buttonSoundActivated;
 	
 	private Stage stage;
-	private Music musicBackground;
-	public MenuState(GameStateManager gsm, TextureAtlas ta) {
+	
+	private TextureAtlas ta;
+	public MenuState(GameStateManager gsm, TextureAtlas _ta) {
 		super(gsm);
 		
-		
+		ta=_ta;
 		background=new Texture("background.png");
 		menustate=new Texture("menu.png");
 		
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
+		
 		
 		tittle=new MyActor(ta.createSprite("tittle"));
 		MoveToAction moveToActionup = new MoveToAction();
@@ -86,7 +86,7 @@ public class MenuState extends State{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				buttonPlay.playSound();
-				
+				handleInputManually(1);
 			}
 		});	
 		stage.addActor(buttonPlay);
@@ -119,6 +119,7 @@ public class MenuState extends State{
 				if(curMode==-1)
 					curMode=2;
 				modeStatus.get(curMode).setVisible(true);
+				MyModeGame.setMode(curMode);
 			}
 		});	
 		buttonModeRight.addListener(new ClickListener() {
@@ -130,6 +131,7 @@ public class MenuState extends State{
 				if(curMode==3)
 					curMode=0;
 				modeStatus.get(curMode).setVisible(true);
+				MyModeGame.setMode(curMode);
 			}
 		});
 		stage.addActor(modeStatus.get(0));
@@ -144,7 +146,8 @@ public class MenuState extends State{
 		buttonScore.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				buttonScore.playSound();	
+				buttonScore.playSound();
+				handleInputManually(2);
 			}
 		});	
 		stage.addActor(buttonScore);
@@ -156,6 +159,7 @@ public class MenuState extends State{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				buttonOnline.playSound();	
+				handleInputManually(3);
 			}
 		});	
 		stage.addActor(buttonOnline);
@@ -167,6 +171,7 @@ public class MenuState extends State{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				buttonHelp.playSound();	
+				handleInputManually(4);
 			}
 		});	
 		stage.addActor(buttonHelp);
@@ -178,14 +183,16 @@ public class MenuState extends State{
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				buttonExit.playSound();	
+				handleInputManually(5);
 			}
 		});	
 		stage.addActor(buttonExit);
 		
-		musicBackground =MyAsset.Instance().getManger().get(MyAsset.audio_background,Music.class);
-		musicBackground.setLooping(true);
-		musicBackground.setVolume(0.8f);
-		musicBackground.play();
+//		musicBackground =MyAsset.Instance().getManger().get(MyAsset.audio_background,Music.class);
+//		musicBackground.setLooping(true);
+//		musicBackground.setVolume(0.8f);
+//		musicBackground.play();
+		MySound.playMusic();
 		
 		buttonSoundUnactivated=new ImageButton(new TextureRegionDrawable(new TextureRegion(menustate,125,170,172-125,60)));
 		buttonSoundActivated =new ImageButton(new TextureRegionDrawable(new TextureRegion(menustate,30,160,90,80)));
@@ -200,7 +207,7 @@ public class MenuState extends State{
 			public void clicked(InputEvent event, float x, float y) {
 				buttonSoundActivated.setVisible(false);
 				buttonSoundUnactivated.setVisible(true);
-				musicBackground.pause();
+				MySound.pauseMusic();
 			}
 		});	
 		buttonSoundUnactivated.addListener(new ClickListener() {
@@ -208,19 +215,46 @@ public class MenuState extends State{
 			public void clicked(InputEvent event, float x, float y) {
 				buttonSoundUnactivated.setVisible(false);
 				buttonSoundActivated.setVisible(true);
-				musicBackground.play();
+				MySound.playMusic();
 			}
 		});	
 		stage.addActor(buttonSoundUnactivated);
 		stage.addActor(buttonSoundActivated);
-		
-	
-	        
+	     
 	}
+	
 	@Override
 	public void handleInput() {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public void handleInputManually(int valueHandle) {
+		// TODO Auto-generated method stub	
+		if(valueHandle==1) {
+			gsm.set(new PlayState(gsm,ta));
+			dispose();
+			return ;
+		}
+		
+		if(valueHandle==2) {
+			//show score
+			return;
+		}
+		
+		if(valueHandle==3) {
+			//online function
+			return;
+		}
+		
+		if(valueHandle==4) {
+			//help function
+			return;
+		}
+		
+		if(valueHandle==5) {
+			//exit function
+			return;
+		}
 	}
 	
 	@Override
@@ -235,6 +269,7 @@ public class MenuState extends State{
 	}
 	@Override
 	public void update(float dt) {
+//		tweenManager.update(dt);
 		// TODO Auto-generated method stub
 		
 	}
@@ -250,4 +285,5 @@ public class MenuState extends State{
 		menustate.dispose();
 		stage.dispose();
 	}
+	
 }

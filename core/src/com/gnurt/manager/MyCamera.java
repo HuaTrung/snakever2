@@ -1,10 +1,11 @@
 package com.gnurt.manager;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-//import com.gnurt.viewport.*;
+
 public class MyCamera {
 	private static MyCamera instance=null;
 	private Viewport viewport;
